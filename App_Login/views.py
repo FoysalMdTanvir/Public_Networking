@@ -4,14 +4,15 @@ from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from App_Login.forms import SignUpForm, UserLogin
 # Create your views here.
 
 
 def sign_up(request):
-    form = UserCreationForm()
+    form = SignUpForm()
     registered = False
     if request.method == 'POST':
-        form = UserCreationForm(data=request.POST)
+        form = SignUpForm(data=request.POST)
         if form.is_valid():
             form.save()
             registered = True
@@ -20,9 +21,9 @@ def sign_up(request):
 
 
 def login_page(request):
-    form = AuthenticationForm()
+    form = UserLogin()
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
+        form = UserLogin(data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
