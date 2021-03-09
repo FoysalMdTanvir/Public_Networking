@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <title>{% block title_block %} iBook {% endblock %}</title>
+  {% block css_block %}
+  {% endblock %}
 </head>
 
 <body>
@@ -33,7 +35,7 @@
       </li>
       {% else %}
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'App_Login:signup' %}">Registration</a>
+        <a class="nav-link" href="{% url 'App_Login:signup' %}">Sign Up</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'App_Login:login' %}">Login</a>
