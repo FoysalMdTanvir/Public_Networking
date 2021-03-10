@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title_block %}iBook | @{{user.username}}{% endblock %}
+{% block css_block %}
+{% endblock %}
+{% block body_block %}
+<h4>My Profile</h4>
+<p>Username: {{ user.username }}</p>
+<p>Email: {{ user.email }}</p>
+<p>Full Name: {{ user.first_name }} {{ user.last_name }}</p>
+<p>About Me: {{user.user_profile.description|linebreaks}}</p>
+<p>Date of Birth: {{user.user_profile.dob}}</p>
+<p>Website: {{user.user_profile.website}}</p>
+<br>
+<a href="{% url 'App_Login:user_change' %}" class="btn btn-warning btn-sm">Change Profile Info</a>
+{% endblock %}
