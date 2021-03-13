@@ -34,3 +34,11 @@ class UserProfileChange(UserChangeForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name', 'password')
+
+
+class ProfilePic(forms.ModelForm):
+    dob = forms.DateField(widget=forms.TextInput(attrs={'type': 'date', }))
+
+    class Meta:
+        model = UserProfile
+        fields = ['profile_pic', 'dob', 'description', 'website', ]

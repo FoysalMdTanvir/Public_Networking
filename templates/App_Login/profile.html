@@ -4,6 +4,15 @@
 {% endblock %}
 {% block body_block %}
 <h4>My Profile</h4>
+{% if user.user_profile %}
+<img src="/media/{{user.user_profile.profile_pic}}" class="rounded-circle" width="130px">
+<br><br>
+<a href="{% url 'App_Login:change_pro_pic' %}" class="btn btn-info btn-sm">Change Profile Details</a>
+{% else %}
+<img src="/media/profile_pics/default_pic.PNG" class="rounded-circle" width="100px">
+<br><br>
+<a href="{% url 'App_Login:add_pro_pic' %}" class="btn btn-info btn-sm">Change Profile Pic</a>
+{% endif %}
 <p>Username: {{ user.username }}</p>
 <p>Email: {{ user.email }}</p>
 <p>Full Name: {{ user.first_name }} {{ user.last_name }}</p>
@@ -11,5 +20,5 @@
 <p>Date of Birth: {{user.user_profile.dob}}</p>
 <p>Website: {{user.user_profile.website}}</p>
 <br>
-<a href="{% url 'App_Login:user_change' %}" class="btn btn-warning btn-sm">Change Profile Info</a>
+<a href="{% url 'App_Login:user_change' %}" class="btn btn-warning btn-sm">Change Basic Info</a>
 {% endblock %}
