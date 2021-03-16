@@ -4,21 +4,30 @@
 {% endblock %}
 {% block body_block %}
 <h4>My Profile</h4>
-{% if user.user_profile %}
-<img src="/media/{{user.user_profile.profile_pic}}" class="rounded-circle" width="130px">
-<br><br>
-<a href="{% url 'App_Login:change_pro_pic' %}" class="btn btn-info btn-sm">Change Profile Details</a>
-{% else %}
-<img src="/media/profile_pics/default_pic.PNG" class="rounded-circle" width="100px">
-<br><br>
-<a href="{% url 'App_Login:add_pro_pic' %}" class="btn btn-info btn-sm">Change Profile Pic</a>
-{% endif %}
-<p>Username: {{ user.username }}</p>
-<p>Email: {{ user.email }}</p>
-<p>Full Name: {{ user.first_name }} {{ user.last_name }}</p>
-<p>About Me: {{user.user_profile.description|linebreaks}}</p>
-<p>Date of Birth: {{user.user_profile.dob}}</p>
-<p>Website: {{user.user_profile.website}}</p>
-<br>
-<a href="{% url 'App_Login:user_change' %}" class="btn btn-warning btn-sm">Change Basic Info</a>
+<div class="row">
+  <div class="col-sm-4">
+    {% if user.user_profile %}
+    <img src="/media/{{user.user_profile.profile_pic}}" class="rounded-circle" width="130px">
+    <br><br>
+    <a href="{% url 'App_Login:change_pro_pic' %}" class="btn btn-info btn-sm">Edit Profile Details</a>
+    {% else %}
+    <img src="/media/profile_pics/default_pic.PNG" class="rounded-circle" width="100px">
+    <br><br>
+    <a href="{% url 'App_Login:add_pro_pic' %}" class="btn btn-info btn-sm">Edit Profile Details</a>
+    {% endif %}
+  </div>
+  <div class="col-sm-5">
+    <h5>Username: {{ user.username }} &nbsp;<a href="{% url 'App_Login:user_change' %}" class="btn btn-outline-secondary btn-sm">Change Basic Info</a></h5>
+    <h5> Email: {{ user.email }}</h5>
+    <h5>Full Name: {{ user.first_name }} {{ user.last_name }}</h5>
+    <h5>About Me: {{user.user_profile.description}}</h5>
+    <h5>Date of Birth:&nbsp;{{user.user_profile.dob}}</h5>
+    <h5>Website: {{user.user_profile.website}}</h5>
+  </div>
+  <div class="col-sm-3">
+    <h5>{{user.content.count}} Content</h5>
+    <h5>{{user.following.count}} followers &nbsp; {{user.follower.count}} following</h5>
+  </div>
+</div>
+<hr>
 {% endblock %}
