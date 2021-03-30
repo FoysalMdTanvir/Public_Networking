@@ -5,6 +5,7 @@ from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from App_Login.forms import SignUpForm, UserLogin, UserProfileChange, ProfilePic
+from django.contrib.auth.models import User
 # Create your views here.
 
 
@@ -92,3 +93,11 @@ def change_pro_pic(request):
             form.save()
             return HttpResponseRedirect(reverse('App_Login:profile'))
     return render(request, 'App_Login/pro_pic_add.html', context={'form': form})
+
+
+@login_required
+def user(request, username):
+    user_other = User.objects.get(username=username)
+    if user_other == request.user:
+        return HttpResponseRedirect(reverse('App_Login:profile'))
+    return render(request, 'App_Login/user_other.html', context={'user_other': user_other})

@@ -2,6 +2,7 @@ from django.urls import path
 from App_Login import views
 
 app_name = 'App_Login'
+
 urlpatterns = [
     path('signup/', views.sign_up, name='signup'),
     path('login/', views.login_page, name='login'),
@@ -11,4 +12,5 @@ urlpatterns = [
     path('password/', views.pass_change, name='pass_change'),
     path('add-picture/', views.add_pro_pic, name='add_pro_pic'),
     path('change-picture/', views.change_pro_pic, name='change_pro_pic'),
+    path('user/<username>/', views.user, name='user'),
 ]
