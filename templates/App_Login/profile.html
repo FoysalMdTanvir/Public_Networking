@@ -20,7 +20,7 @@
     <h5>Username: {{ user.username }} &nbsp;<a href="{% url 'App_Login:user_change' %}" class="btn btn-outline-secondary btn-sm">Change Basic Info</a></h5>
     <h5> Email: {{ user.email }}</h5>
     <h5>Full Name: {{ user.first_name }} {{ user.last_name }}</h5>
-    <h5>About Me: {{user.user_profile.description}}</h5>
+    <h5>About Me: {{user.user_profile.description|linebreaks}}</h5>
     <h5>Date of Birth:&nbsp;{{user.user_profile.dob}}</h5>
     <h5>Website: {{user.user_profile.website}}</h5>
   </div>

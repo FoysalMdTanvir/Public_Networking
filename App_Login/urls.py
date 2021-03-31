@@ -13,4 +13,6 @@ urlpatterns = [
     path('add-picture/', views.add_pro_pic, name='add_pro_pic'),
     path('change-picture/', views.change_pro_pic, name='change_pro_pic'),
     path('user/<username>/', views.user, name='user'),
+    path('follow/<username>', views.follow, name='follow'),
+    path('unfollow/<username>', views.unfollow, name='unfollow'),
 ]

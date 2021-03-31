@@ -1,20 +1,6 @@
 {% extends 'base.html' %}
 {% block title_block %}{{user_other.first_name}}&nbsp;{{user_other.last_name}} (@{{user_other.username}}) {% endblock %}
 {% block css_block %}
-<style>
-  .crop {
-    width: 200px;
-    height: 200px;
-    overflow: hidden;
-  }
-
-  .crop img {
-    width: 400px;
-    height: 300px;
-    margin: -75px 0 0 -100px;
-
-  }
-</style>
 {% endblock %}
 {% block body_block %}
 <div class="row">
@@ -26,16 +12,30 @@
     {% endif %}
   </div>
   <div class="col=sm-8">
-    <h3>@{{user_other.username}} &nbsp;</h3>
+    <h3>@{{user_other.username}} &nbsp;
+      {% if not already_followed %}
+      <a href="{% url 'App_Login:follow' username=user_other.username %}" class="btn btn-primary">Follow</a>
+      {% else %}
+      <a href="{% url 'App_Login:unfollow' username=user_other.username %}" class="btn btn-primary">Unfollow</a>
+      {% endif %}
+    </h3>
     <br>
     <h4>{{user_other.post_author.count}} content &nbsp; &nbsp; {{user_other.following.count}} followers &nbsp; &nbsp; {{user_other.follower.count}} following &nbsp; &nbsp;</h4>
     <br>
     <h4>{{user_other.first_name}}&nbsp;{{user_other.last_name}}</h4>
     <h6>{{user_other.user_profile.description|linebreaks}}</h6>
+    <h6>Date of Birth:&nbsp;{{user_other.user_profile.dob}}</h6>
+    <h6>Website: {{user_other.user_profile.website}}</h6>
   </div>
 </div>
 <hr>
 <br>
 <br>
-
+<!-- <div class="row">
+  {% for post in user_other.post.all %}
+  <div class="crop">
+    <img src="/media/{{post.image}}" title="{{post.caption}}">
+  </div>
+  {% endfor %}
+</div> -->
 {% endblock %}
