@@ -5,4 +5,5 @@ app_name = 'App_Content'
 
 urlpatterns = [
     path('', views.content_list, name='content_list'),
+    path('write/', views.CreateContent.as_view(), name='create_content'),
 ]
