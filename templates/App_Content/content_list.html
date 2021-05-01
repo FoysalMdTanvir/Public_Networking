@@ -28,7 +28,7 @@
     <div style="border: 1px solid #888888;">
       <div style="padding:10px">
         {% if content.author.user_profile.profile_pic %}
-        <img src="/media/{{user.user_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle">
+        <img src="/media/{{content.author.user_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle">
         {% else %}
         <img src="/media/default_pic.PNG" width="40px" height="40px" class="rounded-circle">
         {% endif %}
