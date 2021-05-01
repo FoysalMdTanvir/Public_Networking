@@ -4,6 +4,7 @@ from App_Content.models import Category, Content, Comment, Likes
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from App_Login.models import UserProfile, Follow
 
 from App_Login.models import UserProfile
 from django.contrib.auth.models import User
@@ -24,7 +25,9 @@ class CreateContent(LoginRequiredMixin, CreateView):
 
 @login_required
 def content_list(request):
+    following_list = Follow.objects.filter(follower=request.user)
+    contents = Content.objects.filter(author__in=following_list.values_list('following'))
     if request.method == 'GET':
         search = request.GET.get('search', '')
         result = User.objects.filter(username__icontains=search)
-    return render(request, 'App_Content/content_list.html', context={'search': search, 'result': result})
+    return render(request, 'App_Content/content_list.html', context={'search': search, 'result': result, 'contents': contents})
