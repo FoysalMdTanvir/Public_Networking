@@ -23,7 +23,7 @@
 {% endfor %}
 {% else %}
 <div class="row">
-  <div class="col-sm-8">
+  <div class="col-sm-9">
     {% for content in contents %}
     <div style="border: 1px solid #888888;">
       <div style="padding:10px">
@@ -32,16 +32,31 @@
         {% else %}
         <img src="/media/default_pic.PNG" width="40px" height="40px" class="rounded-circle">
         {% endif %}
-        <a href="{% url 'App_Login:user' username=content.author %}">{{content.author}}</a>
+        <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
       </div>
-      {{content.caption_content}}
-      <img src="/media/{{content.image}}" width="100%">
+      <hr>
+      &nbsp; {{content.caption_content}} <br>
+      &nbsp; <img src="/media/{{content.image}}" width="100%">
     </div>
     <br><br>
     {% endfor %}
-
   </div>
-
+  <div class="col-sm-3">
+    <div class="row">
+      <div class="col-sm-4">
+        {% if user.user_profile.profile_pic %}
+        <img src="/media/{{user.user_profile.profile_pic}}" width="75px" height="75px" class="rounded-circle">
+        {% else %}
+        <img src="/media/default_pic.png" width="75px" height="75px" class="rounded-circle">
+        {% endif %}
+      </div>
+      <div class="col-sm-8">
+        <a href="{% url 'App_Login:profile' %}">{{user.username}}</a>
+        <br>
+        {{user.first_name}} {{user.last_name}}
+      </div>
+    </div>
+  </div>
 </div>
 {% endif %}
 {% endblock %}
