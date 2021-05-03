@@ -33,10 +33,22 @@
         <img src="/media/default_pic.PNG" width="40px" height="40px" class="rounded-circle">
         {% endif %}
         <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
+
+        <small style="font-size:11px; text-align:right;">
+          {{content.publish_date}}
+        </small>
       </div>
-      <hr>
       &nbsp; {{content.caption_content}} <br>
       &nbsp; <img src="/media/{{content.image}}" width="100%">
+      <div style="padding:20px">
+        {{post.caption}}<br>
+        {{ content.liked_content.count }} Likes <br>
+        {% if content.pk in liked_content_list %}
+        <a href="{% url 'App_Content:unliked' pk=content.pk %}"><i class="fa fa-heart" style="font-size:36px"></i></a>
+        {% else %}
+        <a href="{% url 'App_Content:liked' pk=content.pk %}"><i class="fa fa-heart-o" style="font-size:36px"></i></a>
+        {% endif %}
+      </div>
     </div>
     <br><br>
     {% endfor %}

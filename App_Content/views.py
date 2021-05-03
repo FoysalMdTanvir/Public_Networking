@@ -27,7 +27,27 @@ class CreateContent(LoginRequiredMixin, CreateView):
 def content_list(request):
     following_list = Follow.objects.filter(follower=request.user)
     contents = Content.objects.filter(author__in=following_list.values_list('following'))
+    liked_content = Likes.objects.filter(user=request.user)
+    liked_content_list = liked_content.values_list('content', flat=True)
     if request.method == 'GET':
         search = request.GET.get('search', '')
         result = User.objects.filter(username__icontains=search)
-    return render(request, 'App_Content/content_list.html', context={'search': search, 'result': result, 'contents': contents})
+    return render(request, 'App_Content/content_list.html', context={'search': search, 'result': result, 'contents': contents, 'liked_content_list': liked_content_list})
+
+
+@login_required
+def liked(request, pk):
+    content = Content.objects.get(pk=pk)
+    already_liked = Likes.objects.filter(content=content, user=request.user)
+    if not already_liked:
+        liked_content = Likes(content=content, user=request.user)
+        liked_content.save()
+    return HttpResponseRedirect(reverse('index'))
+
+
+@login_required
+def unliked(request, pk):
+    content = Content.objects.get(pk=pk)
+    already_liked = Likes.objects.filter(content=content, user=request.user)
+    already_liked.delete()
+    return HttpResponseRedirect(reverse('index'))
