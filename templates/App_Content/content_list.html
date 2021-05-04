@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load custom_filters %}
 {% block title_block %}iBook | Home {% endblock %}
 {% block body_block %}
 {% if search %}
@@ -38,11 +39,11 @@
           {{content.publish_date}}
         </small>
       </div>
-      &nbsp; {{content.caption_content}} <br>
+      <hr>
+      &nbsp; {{content.caption_content|range_filter}}<a href="#">see more</a>
       &nbsp; <img src="/media/{{content.image}}" width="100%">
       <div style="padding:20px">
-        {{post.caption}}<br>
-        {{ content.liked_content.count }} Likes <br>
+        <b>{{ content.liked_content.count }} Likes</b> &nbsp;&nbsp;&nbsp; <b><a href="#">Comments</b></a><br>
         {% if content.pk in liked_content_list %}
         <a href="{% url 'App_Content:unliked' pk=content.pk %}"><i class="fa fa-heart" style="font-size:36px"></i></a>
         {% else %}
