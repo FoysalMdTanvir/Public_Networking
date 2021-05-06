@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from App_Login.models import UserProfile, Follow
 
+from App_Content.forms import CommentForm
 from App_Login.models import UserProfile
 from django.contrib.auth.models import User
 # Create your views here.
@@ -33,6 +34,21 @@ def content_list(request):
         search = request.GET.get('search', '')
         result = User.objects.filter(username__icontains=search)
     return render(request, 'App_Content/content_list.html', context={'search': search, 'result': result, 'contents': contents, 'liked_content_list': liked_content_list})
+
+
+@login_required
+def content_details(request, pk):
+    content = Content.objects.get(pk=pk)
+    comment_form = CommentForm()
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.user = request.user
+            comment.content = content
+            comment.save()
+            return HttpResponseRedirect(reverse('App_Content:content_details', kwargs={'pk': pk}))
+    return render(request, 'App_Content/content_details.html', context={'content': content, 'comment_form': comment_form, })
 
 
 @login_required

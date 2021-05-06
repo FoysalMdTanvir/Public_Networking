@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %}iBook | Comment {% endblock %}
+{% block body_block %}
+<div class="row">
+  <div class="col-sm-9">
+    <div style="border: 1px solid #888888;">
+      <div style="padding:8px">
+        {% if content.author.user_profile.profile_pic %}
+        <img src="/media/{{content.author.user_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle">
+        {% else %}
+        <img src="/media/default_pic.PNG" width="40px" height="40px" class="rounded-circle">
+        {% endif %}
+        <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
+        <h6 style="font-size:11px; text-align:right;">
+          Published On: {{content.publish_date}} &nbsp; Updated On: {{content.update_date}}
+        </h6>
+        <h6 style="font-size:11px; text-align:right;">
+          {{ content.liked_content.count }} Likes &nbsp; {{ content.content_comment.count }}&nbsp;Comments
+        </h6>
+      </div>
+      <hr>
+      {{content.caption_content|linebreaks}}
+      <img src="/media/{{content.image}}" width="100%">
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="row">
+      <div class="col-sm-4">
+        {% if user.user_profile.profile_pic %}
+        <img src="/media/{{user.user_profile.profile_pic}}" width="75px" height="75px" class="rounded-circle">
+        {% else %}
+        <img src="/media/default_pic.png" width="75px" height="75px" class="rounded-circle">
+        {% endif %}
+      </div>
+      <div class="col-sm-8">
+        <a href="{% url 'App_Login:profile' %}">{{user.username}}</a>
+        <br>
+        {{user.first_name}} {{user.last_name}}
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-sm-3">
+    <hr>
+    <h5>Comments: </h5>
+    {% for comment in content.content_comment.all %}
+    <div style="padding:10px">
+      {% if comment.user.user_profile.profile_pic %}
+      <img src="/media/{{comment.user.user_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle">
+      {% else %}
+      <img src="/media/default_pic.PNG" width="40px" height="40px" class="rounded-circle">
+      {% endif %}
+      <a href="{% url 'App_Login:user' username=comment.user %}">{{comment.user.first_name}} {{comment.user.last_name}}</a>
+    </div>{{comment.comment}}<br>
+    <i style="font-size:11px;">{{comment.comment_date}}</i>
+
+    {% endfor %}
+  </div>
+  <div class="col-sm-6">
+    <form method="post">
+      {{ comment_form|crispy }}
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary btn-sm">Comment</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
