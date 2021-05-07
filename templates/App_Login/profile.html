@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load custom_filters %}
 {% block title_block %}iBook | @{{user.username}}{% endblock %}
 {% block css_block %}
 {% endblock %}
@@ -30,4 +31,30 @@
   </div>
 </div>
 <hr>
+{% for content in user.post_author.all %}
+<div class="row">
+  <div class="col-sm-9">
+
+    <div style="border: 1px solid #888888;">
+      <div style="padding:10px">
+        {% if content.author.user_profile.profile_pic %}
+        <img src="/media/{{content.author.user_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle">
+        {% else %}
+        <img src="/media/default_pic.PNG" width="40px" height="40px" class="rounded-circle">
+        {% endif %}
+        <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
+
+        <small style="font-size:11px; text-align:right;">
+          {{content.publish_date}}
+        </small>
+      </div>
+      {{content.caption_content|range_filter}}<a href="{% url 'App_Content:content_details' pk=content.pk %}">see more</a>
+      <img src="/media/{{content.image}}" width="100%">
+    </div>
+  </div><br>
+  <div class="col-sm-3">
+
+  </div>
+</div>
+{% endfor %}
 {% endblock %}

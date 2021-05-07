@@ -24,6 +24,10 @@ class CreateContent(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(reverse('index'))
 
 
+class MyBlogs(LoginRequiredMixin, TemplateView):
+    template_name = 'App_Login/profile.html'
+
+
 @login_required
 def content_list(request):
     following_list = Follow.objects.filter(follower=request.user)
