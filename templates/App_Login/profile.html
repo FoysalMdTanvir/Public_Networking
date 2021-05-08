@@ -44,12 +44,16 @@
         {% endif %}
         <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
 
-        <small style="font-size:11px; text-align:right;">
+        <small style="font-size:11px;">
           {{content.publish_date}}
         </small>
       </div>
       {{content.caption_content|range_filter}}<a href="{% url 'App_Content:content_details' pk=content.pk %}">see more</a>
       <img src="/media/{{content.image}}" width="100%">
+      <div style="padding:10px" class="text-right">
+        <a href="{% url 'App_Content:edit_content' pk=content.pk %}" class="btn btn-outline-info btn-sm">Edit</a>
+
+      </div>
     </div>
   </div><br>
   <div class="col-sm-3">

@@ -71,3 +71,12 @@ def unliked(request, pk):
     already_liked = Likes.objects.filter(content=content, user=request.user)
     already_liked.delete()
     return HttpResponseRedirect(reverse('index'))
+
+
+class UpdateContent(LoginRequiredMixin, UpdateView):
+    model = Content
+    fields = ('category', 'caption_content', 'image')
+    template_name = 'App_Content/edit_content.html'
+
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('App_Content:content_details', kwargs={'pk': self.object.pk})

@@ -9,4 +9,5 @@ urlpatterns = [
     path('details/<pk>', views.content_details, name='content_details'),
     path('liked/<pk>/', views.liked, name='liked'),
     path('unliked/<pk>/', views.unliked, name='unliked'),
+    path('edit/<pk>/', views.UpdateContent.as_view(), name='edit_content'),
 ]

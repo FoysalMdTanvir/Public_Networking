@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %}iBook | Edit {% endblock %}
+{% block body_block %}
+{% if content.author == user %}
+<form method="POST">
+  {{form|crispy}}
+  {% csrf_token %}
+  <button type="submit" name="button">Update</button>
+  {% else %}
+  <p>You are not allowed to view this page. 404</p>
+</form>
+{% endif %}
+{% endblock %}
