@@ -52,6 +52,7 @@
       <img src="/media/{{content.image}}" width="100%">
       <div style="padding:10px" class="text-right">
         <a href="{% url 'App_Content:edit_content' pk=content.pk %}" class="btn btn-outline-info btn-sm">Edit</a>
+        <a href="{% url 'App_Content:delete_content' pk=content.pk %}" class="btn btn-outline-danger btn-sm">Delete</a>
 
       </div>
     </div>

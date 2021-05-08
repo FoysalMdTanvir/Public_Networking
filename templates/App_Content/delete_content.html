@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title_block %}iBook | Delete{% endblock %}
+{% block body_block %}
+<form method="POST">
+  {% csrf_token %}
+  <div class="alert alert-success">
+    Are you sure to delete this blog ?
+  </div>
+  <input type="submit" name="submit" value="Delete" class="btn btn-danger btn-sm"> <a href="{% url 'App_Content:delete_content' pk=content.pk %}" </a>
+    <a href="{% url 'App_Login:profile' %}" class="btn btn-info btn-sm">Cancel</a>
+</form>
+
+{% endblock %}

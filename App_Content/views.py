@@ -80,3 +80,12 @@ class UpdateContent(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self, **kwargs):
         return reverse_lazy('App_Content:content_details', kwargs={'pk': self.object.pk})
+
+
+class DleteContent(LoginRequiredMixin, DeleteView):
+    model = Content
+    fields = ('category', 'caption_content', 'image')
+    template_name = 'App_Content/delete_content.html'
+
+    def get_success_url(self):
+        return reverse_lazy('App_Content:content_list')
