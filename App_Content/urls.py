@@ -10,5 +10,6 @@ urlpatterns = [
     path('liked/<pk>/', views.liked, name='liked'),
     path('unliked/<pk>/', views.unliked, name='unliked'),
     path('edit/<pk>/', views.UpdateContent.as_view(), name='edit_content'),
-    path('delete/<pk>/', views.DleteContent.as_view(), name='delete_content'),
+    path('delete/<pk>/', views.DeleteContent.as_view(), name='delete_content'),
+    path('category/<pk>/', views.CategoryView, name='category'),
 ]

@@ -35,7 +35,7 @@
         <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search">
         <button class="btn btn-secondary" type="submit">Search</button>
       </form>
-      <div class="nav-item dropdown active">
+      <div class="nav-item dropdown active ">
         {% if user.user_profile.profile_pic %}
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="{% url 'App_Login:profile' %}"><img src="/media/{{user.user_profile.profile_pic}}" width="30px" height="30px" class="rounded-circle">&nbsp; {{user.first_name}}</a>
         {% else %}

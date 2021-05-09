@@ -36,7 +36,7 @@
         <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
 
         <small style="font-size:11px; text-align:right;">
-          {{content.publish_date}}
+          {{content.publish_date}} <a href="{% url 'App_Content:category' pk=content.pk %}">{{content.category}}</a>
         </small>
       </div>
       <hr>
