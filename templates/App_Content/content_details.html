@@ -12,7 +12,7 @@
         <img src="/media/default_pic.PNG" width="40px" height="40px" class="rounded-circle">
         {% endif %}
         <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a> &nbsp; <small style="font-size:11px;">
-          <a href="{% url 'App_Content:category' pk=content.pk %}">{{content.category}}</a>
+          <a href="{% url 'App_Content:category' cats=content.category %}">{{content.category}}</a>
         </small>
         <h6 style="font-size:11px; text-align:right;">
           Published On: {{content.publish_date}} &nbsp; Updated On: {{content.update_date}}

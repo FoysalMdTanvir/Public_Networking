@@ -3,6 +3,7 @@
 {% block title_block %}iBook | Categories {% endblock %}
 {% block body_block %}
 {% if category_contents %}
+<h3 class="text-right">{{cats}}</h3>
 <div class="row">
   <div class="col-sm-9">
     {% for content in category_contents %}
@@ -16,7 +17,7 @@
         <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
 
         <small style="font-size:11px; text-align:right;">
-          {{content.publish_date}} {{content.category}}
+          {{content.publish_date}}
         </small>
       </div>
       <hr>

@@ -36,13 +36,13 @@
         <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
 
         <small style="font-size:11px; text-align:right;">
-          {{content.publish_date}} <a href="{% url 'App_Content:category' pk=content.pk %}">{{content.category}}</a>
+          {{content.publish_date}} <a href="{% url 'App_Content:category' cats=content.category %}">{{content.category}}</a>
         </small>
       </div>
       <hr>
       {{content.caption_content|range_filter}}<a href="{% url 'App_Content:content_details' pk=content.pk %}">see more</a>
       <img src="/media/{{content.image}}" width="100%">
-      <div style="padding:20px">
+      <div style="padding:5px">
         <b>{{ content.liked_content.count }} Likes</b> &nbsp;&nbsp;&nbsp; <b><a href="{% url 'App_Content:content_details' pk=content.pk %}">{{ content.content_comment.count }}&nbsp;Comments</b></a><br>
         {% if content.pk in liked_content_list %}
         <a href="{% url 'App_Content:unliked' pk=content.pk %}"><i class="fa fa-heart" style="font-size:36px"></i></a>
@@ -50,6 +50,9 @@
         <a href="{% url 'App_Content:liked' pk=content.pk %}"><i class="fa fa-heart-o" style="font-size:36px"></i></a>
         {% endif %}
       </div>
+    </div>
+    <div class="padding:2px">
+
     </div>
     <br><br>
     {% endfor %}

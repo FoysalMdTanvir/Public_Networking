@@ -92,6 +92,6 @@ class DeleteContent(LoginRequiredMixin, DeleteView):
 
 
 @login_required
-def CategoryView(request, pk):
-    category_contents = Content.objects.filter(category=pk)
-    return render(request, 'App_Content/categories.html', context={'pk': pk, 'category_contents': category_contents})
+def CategoryView(request, cats):
+    category_contents = Content.objects.filter(category__title__contains=cats)
+    return render(request, 'App_Content/categories.html', context={'cats': cats.title(), 'category_contents': category_contents})

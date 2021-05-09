@@ -11,5 +11,5 @@ urlpatterns = [
     path('unliked/<pk>/', views.unliked, name='unliked'),
     path('edit/<pk>/', views.UpdateContent.as_view(), name='edit_content'),
     path('delete/<pk>/', views.DeleteContent.as_view(), name='delete_content'),
-    path('category/<pk>/', views.CategoryView, name='category'),
+    path('category/<str:cats>/', views.CategoryView, name='category'),
 ]
