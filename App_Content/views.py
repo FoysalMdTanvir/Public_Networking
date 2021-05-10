@@ -18,13 +18,13 @@ class CreateContent(LoginRequiredMixin, CreateView):
     fields = ('category', 'caption_content', 'image')
 
     def form_valid(self, form):
-        blog_obj = form.save(commit=False)
-        blog_obj.author = self.request.user
-        blog_obj.save()
-        return HttpResponseRedirect(reverse('index'))
+        content_obj = form.save(commit=False)
+        content_obj.author = self.request.user
+        content_obj.save()
+        return HttpResponseRedirect(reverse('App_Content:my_contents'))
 
 
-class MyBlogs(LoginRequiredMixin, TemplateView):
+class MyContents(LoginRequiredMixin, TemplateView):
     template_name = 'App_Login/profile.html'
 
 
@@ -84,7 +84,7 @@ class UpdateContent(LoginRequiredMixin, UpdateView):
 
 class DeleteContent(LoginRequiredMixin, DeleteView):
     model = Content
-    fields = ('caption_content', 'image')
+    fields = ('category', 'caption_content', 'image')
     template_name = 'App_Content/delete_content.html'
 
     def get_success_url(self):
