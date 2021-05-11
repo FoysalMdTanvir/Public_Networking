@@ -31,21 +31,28 @@
         <a class="nav-link" href="{% url 'index' %}"><i class="fa fa-home" style="font-size:30px;color:#F8F9F9"></i></a>
       </li>
       &nbsp; &nbsp;
-      {% if cat_menu %}
-      <div class="nav-item dropdown active">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Categories</a>
-
+      <!-- Categories -->
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="{% url 'App_Content:category_list' %}" id="navbardrop" data-toggle="dropdown">
+          Categories
+        </a>
+        {% if cat_menu_list %}
         <div class="dropdown-menu">
-          {%for item in cat_menu%}
-          <a class="dropdown-item" href="{% url 'App_Content:category' item|slugify %}">{{item}}</a><br>
+          {%for item in cat_menu_list%}
+          <a class="dropdown-item" href="{% url 'App_Content:category' cats=item|slugify %}">{{item}}</a> <br>
           {% endfor %}
         </div>
-      </div>{% endif %}
+        {% endif  %}
+      </li>
+
+
       &nbsp; &nbsp;
+      <!-- Search -->
       <form class="form-inline" method="GET">
         <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search">
         <button class="btn btn-secondary" type="submit">Search</button>
       </form>
+      <!-- Profile Dropdown -->
       <div class="nav-item dropdown active ">
         {% if user.user_profile.profile_pic %}
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="{% url 'App_Login:profile' %}"><img src="/media/{{user.user_profile.profile_pic}}" width="30px" height="30px" class="rounded-circle">&nbsp; {{user.first_name}}</a>

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title_block %}iBook | Category List {% endblock %}
+{% block body_block %}
+<h2>Categories</h2>
+{%for item in cat_menu_list%}
+<a href="{% url 'App_Content:category' cats=item|slugify %}">{{item}}</a><br>
+{% endfor %}
+{% endblock %}

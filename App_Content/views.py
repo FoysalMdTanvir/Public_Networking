@@ -97,11 +97,6 @@ def CategoryView(request, cats):
     return render(request, 'App_Content/categories.html', context={'cats': cats.title().replace('-', ' '), 'category_contents': category_contents})
 
 
-class CategoryListView(LoginRequiredMixin, ListView):
-    model = Content
-
-    def get_context_data(self, *args, **kwargs):
-        cat_menu = Category.objects.all()
-        context = super(CategoryListView, self).get_context_data(*args, **kwargs)
-        context["cat_menu"] = cat_menu
-        return context
+@login_required
+def CategoryListView(request):
+    return render(request, 'App_Content/category_list.html')
