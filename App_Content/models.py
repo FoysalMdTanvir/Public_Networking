@@ -18,8 +18,9 @@ class Category(models.Model):
 class Content(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_author')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
-    caption_content = models.TextField(verbose_name="What is on your mind?")
-    image = models.ImageField(upload_to='content_images', verbose_name="Image")
+    caption_content = models.TextField(null=True, blank=True, verbose_name="What is on your mind?")
+    image = models.ImageField(null=True, blank=True,
+                              upload_to='content_images', verbose_name="Image")
     publish_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
 

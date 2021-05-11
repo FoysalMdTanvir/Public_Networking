@@ -23,7 +23,9 @@
       </div>
       <hr>
       {{content.caption_content|linebreaks}}
+      {% if content.image %}
       <img src="/media/{{content.image}}" width="100%">
+      {% endif %}
     </div>
   </div>
   <div class="col-sm-3">

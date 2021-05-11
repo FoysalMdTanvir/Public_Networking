@@ -49,7 +49,9 @@
         </small>
       </div>
       {{content.caption_content|range_filter}}<a href="{% url 'App_Content:content_details' pk=content.pk %}">see more</a>
+      {% if content.image %}
       <img src="/media/{{content.image}}" width="100%">
+      {% endif %}
       <div style="padding:10px" class="text-right">
         <a href="{% url 'App_Content:edit_content' pk=content.pk %}" class="btn btn-outline-info btn-sm">Edit</a>
         <a href="{% url 'App_Content:delete_content' pk=content.pk %}" class="btn btn-outline-danger btn-sm">Delete</a>
