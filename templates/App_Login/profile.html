@@ -45,7 +45,7 @@
         <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
 
         <small style="font-size:11px;">
-          {{content.publish_date}} <a href="{% url 'App_Content:category' cats=content.category %}">{{content.category}}</a>
+          {{content.publish_date}} <a href="{% url 'App_Content:category' cats=content.category|slugify %}">{{content.category}}</a>
         </small>
       </div>
       {{content.caption_content|range_filter}}<a href="{% url 'App_Content:content_details' pk=content.pk %}">see more</a>

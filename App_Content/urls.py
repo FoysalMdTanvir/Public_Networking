@@ -13,4 +13,5 @@ urlpatterns = [
     path('edit/<pk>/', views.UpdateContent.as_view(), name='edit_content'),
     path('delete/<pk>/', views.DeleteContent.as_view(), name='delete_content'),
     path('category/<str:cats>/', views.CategoryView, name='category'),
+    path('category/', views.CategoryListView.as_view(), name='category'),
 ]

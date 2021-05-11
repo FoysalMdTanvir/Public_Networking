@@ -4,6 +4,7 @@
 {% block body_block %}
 {% if category_contents %}
 <h3 class="text-right">{{cats}}</h3>
+
 <div class="row">
   <div class="col-sm-9">
     {% for content in category_contents %}
@@ -23,12 +24,13 @@
       <hr>
       {{content.caption_content|range_filter}}<a href="{% url 'App_Content:content_details' pk=content.pk %}">see more</a>
       <img src="/media/{{content.image}}" width="100%">
+
     </div>
     <br><br>
     {% endfor %}
   </div>
 </div>
 {% else %}
-<h3>Opps this page doesn't exist...!!</h3>
+<h3>Opps this page doesn't exist...!!{{cat_menu}}</h3>
 {% endif %}
 {% endblock %}
