@@ -50,9 +50,12 @@
         </small>
       </div>
       {{content.caption_content|range_filter}}<a href="{% url 'App_Content:content_details' pk=content.pk %}">see more</a>
+      {% if content.image %}
       <img src="/media/{{content.image}}" width="100%">
+      {% endif %}
     </div>
-  </div><br>
+    <br>
+  </div>
   <div class="col-sm-3">
 
   </div>

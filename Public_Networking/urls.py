@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('App_Login.urls')),
     path('content/', include('App_Content.urls')),
+    path('chat/', include('chat.urls')),
     path('',  views.Index, name='index'),
 
 ]

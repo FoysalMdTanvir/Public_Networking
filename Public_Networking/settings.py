@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'App_Login',
     'crispy_forms',
     'django_cleanup.apps.CleanupConfig',
+    'rest_framework',
+    'chat'
 ]
 # bootstrap4
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
