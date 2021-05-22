@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %}iBook | chat{% endblock %}
+{% block css_block %}
+
+{% endblock %}
+
+{% block body_block %}
+<div align="center">
+  <h2>Django Chat</h2>
+</div>
+<br>
+<div align="center">
+
+  <form id="post-form" method="POST" action="checkview">
+    {% csrf_token %}
+
+    <label>Room Name</label>
+    <input type="text" name="room_name" id="room_name" width="100px" /> <br>
+    <label>Username</label>
+    <input type="text" name="username" id="username" width="100px" /> <br>
+    <input type="submit" value="Enter Room">
+  </form>
+</div>
+
+{% endblock %}
