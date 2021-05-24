@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}List of Chatrooms{% endblock %}
+
+{% block body_block %}
+
+<!-- Top banner -->
+<div class="jumbotron">
+  <div class="container">
+    <h1>Welcome to Chatbook</h1>
+    <p>Join one of our existing chatrooms or make one of your own.</p>
+    <p>
+      <a class="btn btn-primary btn-lg" href="{% url 'chat:chatrooms' %}">View All Chatrooms &raquo;</a>&nbsp;&nbsp;
+      <a class="btn btn-success btn-lg" href="/chatrooms/create">Create Chatroom &raquo;</a>
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-lg-8">
+
+      <h2>List of Chatrooms</h2>
+
+      <ol>
+        {% for room in all_chatrooms %}
+        <li><a href="/chatrooms/{{ room.slug }}">{{ room.name }}</a> - <i>{{ room.info }}</i></li>
+        {% endfor %}
+      </ol>
+
+      <br>
+      <p>Don't see one you like?&nbsp;&nbsp;<a class="btn btn-success" href="/chatrooms/create">Create a Chatroom &raquo;</a></p>
+    </div>
+
+    <div class="col-lg-4">
+      <h2>Create a Chatroom for your friends!</h2>
+      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet
+        risus.</p>
+      <p><a class="btn btn-primary" href="/chatrooms">View All Chatrooms &raquo;</a></p>
+    </div>
+  </div>
+
+  {% endblock %}
