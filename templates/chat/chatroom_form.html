@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}List of Chatrooms{% endblock %}
+{% block title %}Chatbook{% endblock %}
 
 {% block body_block %}
 
@@ -19,17 +19,21 @@
   <!-- Example row of columns -->
   <div class="row">
     <div class="col-lg-8">
+      <h2>Create a Custom Chatroom</h2>
 
-      <h2>List of Chatrooms</h2>
+      <p>Add a Name and brief Description of your chatroom.</p><br>
 
-      <ol>
-        {% for room in all_chatrooms %}
-        <li><a href="{% url 'chat:chatroom' slug=room.slug %}">{{ room.name }}</a> - <i>{{ room.info }}</i></li>
-        {% endfor %}
-      </ol>
+      <form action="" method="post">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <br>
+        <input type="submit" class="btn btn-success" value="Create a Chatroom" />
+
+      </form>
 
       <br>
-      <p>Don't see one you like?&nbsp;&nbsp;<a class=" btn btn-success" href="{% url 'chat:chatroom_create_form' %}">Create a Chatroom &raquo;</a></p>
     </div>
 
     <div class="col-lg-4">

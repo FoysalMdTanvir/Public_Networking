@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Chatroom - {{ chatroom }}{% endblock %}
+
+{% block body_block %}
+
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-lg-8">
+
+      <h2>This is the "<b>{{ chatroom }}</b>" chatroom.</h2>
+
+      <p><span class="label label-default">Info</span>&nbsp;&nbsp;{{ chatroom.info }}</p>
+      <p><span class="label label-default">Creator</span>&nbsp;&nbsp;{{ chatroom.created_by }}</p>
+      <p><span class="label label-default">Created</span>&nbsp;&nbsp;{{ chatroom.created }}</p>
+      <p>*Displaying 50 most recent Messages</p>
+      <br>
+
+      {% if recent_messages %}
+
+      <p><span class="label label-primary">{{ recent_messages.count }} message{{ recent_messages.count|pluralize }}</p>
+
+      <ol>
+        {# Display 50 most recent Messages in the Chatroom #}
+
+        {% for message in recent_messages %}
+        <li>
+          <b>{{ message.created_by }}</b> at <i>{{ message.created }}</i><br>
+          <p>{{ message.text }}</p>
+        </li>
+        <hr>
+        {% endfor %}
+      </ol>
+      {% else %}
+      <p><b><i>No Messages have been posted yet.</i></b></p><br>
+      {% endif %}
+
+      <p><a class="btn btn-success" href="{% url 'chat:message_create_form' slug=chatroom.slug %}">Post in Chatroom &raquo;</a></p>
+
+    </div>
+
+    <div class="col-lg-4">
+      <h2>Create a Chatroom for your friends!</h2>
+      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet
+        risus.</p>
+      <p><a class="btn btn-primary" href="{% url 'chat:chatrooms' %}">View All Chatrooms &raquo;</a></p>
+    </div>
+  </div>
+
+  {% endblock %}

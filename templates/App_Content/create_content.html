@@ -1,25 +1,18 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block title_block %}iBook | Create Content {% endblock %}
-{% block css_block %}
-<style>
-  .content {
-    width: 1080px;
-    border: 1px solid #ccc;
-    padding: 25px;
-  }
-</style>
-{% endblock %}
+
 {% block body_block %}
-<div class="content">
-  <h4>Write Your Content Here:</h4>
-  <form method="POST" enctype="multipart/form-data">
-    {{ form|crispy }}
-    {% csrf_token %}
-  </form>
-  <div class="text-left">
-    <button type="submit" class="btn btn-success btn-sm">Publish</button>
-  </div>
-</div>
+
+<h4>Write Your Content Here:</h4>
+<form method="POST" enctype="multipart/form-data">
+  {{ form|crispy }}
+  {% csrf_token %}
+  <button type="submit" class="btn btn-success btn-sm">Publish</button>
+</form>
+
+
+
+
 
 {% endblock %}
