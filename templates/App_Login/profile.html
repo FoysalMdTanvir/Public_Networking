@@ -31,10 +31,10 @@
   </div>
 </div>
 <hr>
-{% for content in user.post_author.all %}
+
 <div class="row">
   <div class="col-sm-9">
-
+    {% for content in user.post_author.all %}
     <div style="border: 1px solid #888888;">
       <div style="padding:10px">
         {% if content.author.user_profile.profile_pic %}
@@ -57,13 +57,15 @@
         <a href="{% url 'App_Content:delete_content' pk=content.pk %}" class="btn btn-outline-danger btn-sm">Delete</a>
 
       </div>
-    </div>
-
+    </div><br>
+    {% endfor %}
   </div>
-  <br>
   <div class="col-sm-3">
-
+    {% for chatroom in user.chatroom_creator.all %}
+    <li><a href="{% url 'chat:chatroom' slug=chatroom.slug %}">{{ chatroom.name }}</a>
+      {% endfor %}
   </div>
-</div> <br>
-{% endfor %}
+</div>
+<br>
+
 {% endblock %}

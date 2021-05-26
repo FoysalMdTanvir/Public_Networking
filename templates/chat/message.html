@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Chatroom Message{% endblock %}
+
+{% block body_block %}
+
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-lg-8">
+
+      <h2>This is the "<b>{{ object }}</b>" Message.</h2>
+
+      <p><span class="label label-default">Info</span>&nbsp;&nbsp;{{ object.info }}</p>
+      <p><span class="label label-default">Creator</span>&nbsp;&nbsp;{{ object.created_by }}</p>
+      <p><span class="label label-default">Created</span>&nbsp;&nbsp;{{ object.created }}</p>
+      <br>
+
+      <p><a class="btn btn-success" href="/chatrooms/create">Create Chatroom &raquo;</a></p>
+    </div>
+
+    <div class="col-lg-4">
+      <h2>Create a Chatroom for your friends!</h2>
+      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet
+        risus.</p>
+      <p><a class="btn btn-primary" href="/chatrooms">View All Chatrooms &raquo;</a></p>
+    </div>
+  </div>
+
+  {% endblock %}

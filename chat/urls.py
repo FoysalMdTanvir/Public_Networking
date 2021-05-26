@@ -9,4 +9,5 @@ urlpatterns = [
     path('create/', views.ChatroomCreate.as_view(), name='chatroom_create_form'),
     path('chatrooms/<slug:slug>', views.ChatroomView.as_view(), name='chatroom'),
     path('chatrooms/<slug:slug>/create', views.MessageCreate.as_view(), name='message_create_form'),
+    path('chatrooms/<slug:slug>/<int:pk>/', views.MessageView.as_view(), name='message_view'),
 ]

@@ -32,10 +32,10 @@
 <hr>
 <br>
 <br>
-{% for content in user_other.post_author.all %}
+
 <div class="row">
   <div class="col-sm-9">
-
+    {% for content in user_other.post_author.all %}
     <div style="border: 1px solid #888888;">
       <div style="padding:10px">
         {% if content.author.user_profile.profile_pic %}
@@ -55,10 +55,13 @@
       {% endif %}
     </div>
     <br>
+    {% endfor %}
   </div>
   <div class="col-sm-3">
-
+    {% for chatroom in user_other.chatroom_creator.all %}
+    <li><a href="{% url 'chat:chatroom' slug=chatroom.slug %}">{{ chatroom.name }}</a>
+      {% endfor %}
   </div>
 </div>
-{% endfor %}
+
 {% endblock %}

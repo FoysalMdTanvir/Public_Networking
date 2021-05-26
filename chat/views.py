@@ -109,3 +109,10 @@ class MessageCreate(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy('chat:chatrooms')
+
+
+class MessageView(LoginRequiredMixin, DetailView):
+    """ View to display a Message """
+    model = Message
+    context_object_name = 'message'
+    template_name = 'chat/message.html'

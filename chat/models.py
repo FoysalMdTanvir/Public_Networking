@@ -7,7 +7,7 @@ from autoslug import AutoSlugField
 
 
 class Chatroom(models.Model):
-    name = models.CharField(max_length=50, blank=False)
+    name = models.CharField(max_length=50, unique=True, blank=False)
     info = models.CharField(max_length=300, blank=False)
     slug = AutoSlugField(populate_from='name')
     created = models.DateTimeField(auto_now_add=True)
