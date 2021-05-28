@@ -13,7 +13,6 @@ class Chatroom(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, related_name='chatroom_creator',
                                    on_delete=models.CASCADE, blank=False)
-    # private = models.NullBooleanField()
 
     def get_absolute_url(self):
         return reverse('chatroom_view', kwargs={'slug': self.slug})
@@ -32,9 +31,5 @@ class Message(models.Model):
     def get_absolute_url(self):
         return reverse('message_view', kwargs={'slug': self.slug, 'pk': self.pk})
 
-    # def __unicode__(self):
-    #     return unicode(self.User + ': ' + self.text)
-
     class Meta:
-        # Optional User permission to be able to delete Messages
         ('can_delete_messages', 'can delete messages'),

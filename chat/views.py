@@ -33,7 +33,7 @@ class ChatroomList(LoginRequiredMixin, ListView):
     template_name = 'chat/chatroom_list.html'
 
     def get_queryset(self):
-        # Order all chatrooms by creation time
+
         all_chatrooms = Chatroom.objects.order_by('-created')
         return all_chatrooms
 
@@ -50,7 +50,7 @@ class ChatroomCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         object = form.save(commit=False)
-        # Save request User as creator of Chatroom
+
         object.created_by = self.request.user
         object.save()
         self.success_url = reverse_lazy('chat:chatroom', kwargs={'slug': object.slug})
@@ -63,9 +63,8 @@ class ChatroomView(LoginRequiredMixin, DetailView):
     context_object_name = 'recent_messages'
     context_object_name = 'chatroom'
     template_name = 'chat/chatroom.html'
-    # Slug
+
     slug_url_kwarg = 'slug'
-    # slug_field = 'slug'
 
     def get_object(self, queryset=None):
         rooms = Chatroom.objects.filter(slug=self.kwargs['slug'])
@@ -84,26 +83,23 @@ class ChatroomView(LoginRequiredMixin, DetailView):
 
 class MessageCreate(LoginRequiredMixin, CreateView):
     """ View to create a new Message and add to Chatroom """
-    # Requires JSONResponseMixin and AjaxResponseMixin for AJAX
     model = Message
     fields = ['text']
 
     def get_context_data(self, **kwargs):
         context = super(MessageCreate, self).get_context_data(**kwargs)
-        # context['chatroom_slug'] = Chatroom.objects.get(slug=self.kwargs['slug'])
+
         context['slug'] = self.kwargs['slug']
         return context
 
     def form_valid(self, form):
-        # Add slug to Form, then save to Model
+
         object = form.save(commit=False)
         object.created_by = self.request.user
 
-        # Grab Chatroom by its slug
         message_chatroom_slug = self.kwargs['slug']
         object.chatroom = Chatroom.objects.get(slug=message_chatroom_slug)
 
-        # Save Form to Model (commit=True)
         object.save()
         return super(MessageCreate, self).form_valid(form)
 

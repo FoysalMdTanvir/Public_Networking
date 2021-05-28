@@ -3,13 +3,15 @@
 {% block title_block %}iBook | Create Content {% endblock %}
 
 {% block body_block %}
+<div class="jumbotron">
+  <h4>Write Your Content Here:</h4>
+  <form method="POST" enctype="multipart/form-data">
+    {{ form|crispy }}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Post &raquo;</button>
+  </form>
+</div>
 
-<h4>Write Your Content Here:</h4>
-<form method="POST" enctype="multipart/form-data">
-  {{ form|crispy }}
-  {% csrf_token %}
-  <button type="submit" class="btn btn-success btn-sm">Publish</button>
-</form>
 
 
 

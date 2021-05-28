@@ -47,7 +47,8 @@
       <img src="/media/{{content.image}}" width="100%">
       {% endif %}
       <div style="padding:5px">
-        <b>{{ content.liked_content.count }} Likes</b> &nbsp;&nbsp;&nbsp; <b><a href="{% url 'App_Content:content_details' pk=content.pk %}">{{ content.content_comment.count }}&nbsp;Comments</b></a><br>
+        <b>{{ content.liked_content.count }} Like{{ content.liked_content.count|pluralize }} </b> &nbsp;&nbsp;&nbsp; <b><a
+            href="{% url 'App_Content:content_details' pk=content.pk %}">{{ content.content_comment.count }}&nbsp;Comment{{ content.content_comment.count|pluralize }}</b></a><br>
         {% if content.pk in liked_content_list %}
         <a href="{% url 'App_Content:unliked' pk=content.pk %}"><i class="fa fa-heart" style="font-size:36px"></i></a>
         {% else %}
