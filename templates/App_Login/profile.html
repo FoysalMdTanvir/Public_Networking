@@ -4,66 +4,74 @@
 {% block css_block %}
 {% endblock %}
 {% block body_block %}
-<h4>My Profile</h4>
-<div class="row">
-  <div class="col-sm-4">
-    {% if user.user_profile %}
-    <img src="/media/{{user.user_profile.profile_pic}}" class="rounded-circle" width="130px">
-    <br><br>
-    <a href="{% url 'App_Login:change_pro_pic' %}" class="btn btn-info btn-sm">Edit Profile Details</a>
-    {% else %}
-    <img src="/media/profile_pics/default_pic.PNG" class="rounded-circle" width="100px">
-    <br><br>
-    <a href="{% url 'App_Login:add_pro_pic' %}" class="btn btn-info btn-sm">Edit Profile Details</a>
-    {% endif %}
-  </div>
-  <div class="col-sm-5">
-    <h5>Username: {{ user.username }} &nbsp;<a href="{% url 'App_Login:user_change' %}" class="btn btn-outline-secondary btn-sm">Change Basic Info</a></h5>
-    <h5> Email: {{ user.email }}</h5>
-    <h5>Full Name: {{ user.first_name }} {{ user.last_name }}</h5>
-    <h5>About Me: {{user.user_profile.description|linebreaks}}</h5>
-    <h5>Date of Birth:&nbsp;{{user.user_profile.dob}}</h5>
-    <h5>Website: {{user.user_profile.website}}</h5>
-  </div>
-  <div class="col-sm-3">
-    <h5>{{user.post_author.count}} Content</h5>
-    <h5>{{user.following.count}} followers &nbsp; {{user.follower.count}} following</h5>
+<div class="jumbotron">
+  <h4>My Profile</h4>
+  <div class="row">
+    <div class="col-sm-4">
+      {% if user.user_profile %}
+      <img src="/media/{{user.user_profile.profile_pic}}" class="rounded-circle" width="130px">
+      <br><br>
+      <a href="{% url 'App_Login:change_pro_pic' %}" class="btn btn-info btn-sm">Edit Profile Details</a>
+      {% else %}
+      <img src="/media/profile_pics/default_pic.PNG" class="rounded-circle" width="100px">
+      <br><br>
+      <a href="{% url 'App_Login:add_pro_pic' %}" class="btn btn-info btn-sm">Edit Profile Details</a>
+      {% endif %}
+    </div>
+    <div class="col-sm-5">
+      <h5>Username: {{ user.username }} &nbsp;<a href="{% url 'App_Login:user_change' %}" class="btn btn-outline-secondary btn-sm">Change Basic Info</a></h5>
+      <h5> Email: {{ user.email }}</h5>
+      <h5>Full Name: {{ user.first_name }} {{ user.last_name }}</h5>
+      <h5>About Me: {{user.user_profile.description|linebreaks}}</h5>
+      <h5>Date of Birth:&nbsp;{{user.user_profile.dob}}</h5>
+      <h5>Website: {{user.user_profile.website}}</h5>
+    </div>
+    <div class="col-sm-3">
+      <h5>{{user.post_author.count}} Content</h5>
+      <h5>{{user.following.count}} followers &nbsp; {{user.follower.count}} following</h5>
+    </div>
   </div>
 </div>
 <hr>
 
 <div class="row">
+
+
+
   <div class="col-sm-9">
     {% for content in user.post_author.all %}
-    <div style="border: 1px solid #888888;">
-      <div style="padding:10px">
-        {% if content.author.user_profile.profile_pic %}
-        <img src="/media/{{content.author.user_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle">
-        {% else %}
-        <img src="/media/default_pic.PNG" width="40px" height="40px" class="rounded-circle">
+    <div class="jumbotron">
+      <div style="border: 1px solid #888888;">
+        <div style="padding:10px">
+          {% if content.author.user_profile.profile_pic %}
+          <img src="/media/{{content.author.user_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle">
+          {% else %}
+          <img src="/media/default_pic.PNG" width="40px" height="40px" class="rounded-circle">
+          {% endif %}
+          <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
+
+          <small style="font-size:11px;">
+            {{content.publish_date}} <a href="{% url 'App_Content:category' cats=content.category|slugify %}">{{content.category}}</a>
+          </small>
+        </div>
+        {{content.caption_content|range_filter}}<a href="{% url 'App_Content:content_details' pk=content.pk %}">see more</a>
+        {% if content.image %}
+        <img src="/media/{{content.image}}" width="100%">
         {% endif %}
-        <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
+        <div style="padding:10px" class="text-right">
+          <a href="{% url 'App_Content:edit_content' pk=content.pk %}" class="btn btn-outline-info btn-sm">Edit</a>
+          <a href="{% url 'App_Content:delete_content' pk=content.pk %}" class="btn btn-outline-danger btn-sm">Delete</a>
 
-        <small style="font-size:11px;">
-          {{content.publish_date}} <a href="{% url 'App_Content:category' cats=content.category|slugify %}">{{content.category}}</a>
-        </small>
-      </div>
-      {{content.caption_content|range_filter}}<a href="{% url 'App_Content:content_details' pk=content.pk %}">see more</a>
-      {% if content.image %}
-      <img src="/media/{{content.image}}" width="100%">
-      {% endif %}
-      <div style="padding:10px" class="text-right">
-        <a href="{% url 'App_Content:edit_content' pk=content.pk %}" class="btn btn-outline-info btn-sm">Edit</a>
-        <a href="{% url 'App_Content:delete_content' pk=content.pk %}" class="btn btn-outline-danger btn-sm">Delete</a>
-
+        </div>
       </div>
     </div><br>
     {% endfor %}
   </div>
+
   <div class="col-sm-3">
     {% for chatroom in user.chatroom_creator.all %}
-    <li><a href="{% url 'chat:chatroom' slug=chatroom.slug %}">{{ chatroom.name }}</a>
-      {% endfor %}
+    <li><a href="{% url 'chat:chatroom' slug=chatroom.slug %}">{{ chatroom.name }}</a></li>
+    {% endfor %}
   </div>
 </div>
 <br>

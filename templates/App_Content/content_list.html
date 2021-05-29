@@ -26,40 +26,42 @@
 <div class="row">
   <div class="col-sm-9">
     {% for content in contents %}
-    <div style="border: 1px solid #888888;">
-      <div style="padding:10px">
-        {% if content.author.user_profile.profile_pic %}
-        <img src="/media/{{content.author.user_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle">
-        {% else %}
-        <img src="/media/default_pic.PNG" width="40px" height="40px" class="rounded-circle">
-        {% endif %}
-        <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
+    <div class="jumbotron">
+      <div style="border: 1px solid #888888;">
+        <div style="padding:10px">
+          {% if content.author.user_profile.profile_pic %}
+          <img src="/media/{{content.author.user_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle">
+          {% else %}
+          <img src="/media/default_pic.PNG" width="40px" height="40px" class="rounded-circle">
+          {% endif %}
+          <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
 
-        <small style="font-size:11px; text-align:right;">
-          {{content.publish_date}} <a href="{% url 'App_Content:category' cats=content.category|slugify %}">{{content.category}}</a>
-        </small>
-      </div>
-      <hr>
-      {% if content.caption_content %}
-      {{content.caption_content|range_filter}}<a href="{% url 'App_Content:content_details' pk=content.pk %}">see more</a>
-      {% endif %}
-      {% if content.image %}
-      <img src="/media/{{content.image}}" width="100%">
-      {% endif %}
-      <div style="padding:5px">
-        <b>{{ content.liked_content.count }} Like{{ content.liked_content.count|pluralize }} </b> &nbsp;&nbsp;&nbsp; <b><a
-            href="{% url 'App_Content:content_details' pk=content.pk %}">{{ content.content_comment.count }}&nbsp;Comment{{ content.content_comment.count|pluralize }}</b></a><br>
-        {% if content.pk in liked_content_list %}
-        <a href="{% url 'App_Content:unliked' pk=content.pk %}"><i class="fa fa-heart" style="font-size:36px"></i></a>
-        {% else %}
-        <a href="{% url 'App_Content:liked' pk=content.pk %}"><i class="fa fa-heart-o" style="font-size:36px"></i></a>
+          <small style="font-size:11px; text-align:right;">
+            {{content.publish_date}} <a href="{% url 'App_Content:category' cats=content.category|slugify %}">{{content.category}}</a>
+          </small>
+        </div>
+        <hr>
+        {% if content.caption_content %}
+        {{content.caption_content|range_filter}}<a href="{% url 'App_Content:content_details' pk=content.pk %}">see more</a>
         {% endif %}
+        {% if content.image %}
+        <img src="/media/{{content.image}}" width="100%">
+        {% endif %}
+        <div style="padding:5px">
+          <b>{{ content.liked_content.count }} Like{{ content.liked_content.count|pluralize }} </b> &nbsp;&nbsp;&nbsp; <b><a
+              href="{% url 'App_Content:content_details' pk=content.pk %}">{{ content.content_comment.count }}&nbsp;Comment{{ content.content_comment.count|pluralize }}</b></a><br>
+          {% if content.pk in liked_content_list %}
+          <a href="{% url 'App_Content:unliked' pk=content.pk %}"><i class="fa fa-heart" style="font-size:36px"></i></a>
+          {% else %}
+          <a href="{% url 'App_Content:liked' pk=content.pk %}"><i class="fa fa-heart-o" style="font-size:36px"></i></a>
+          {% endif %}
+        </div>
       </div>
     </div>
-
     <br>
     {% endfor %}
   </div>
+
   <div class="col-sm-3">
     <div class="row">
       <div class="col-sm-4">

@@ -4,29 +4,31 @@
 {% block css_block %}
 {% endblock %}
 {% block body_block %}
-<div class="row">
-  <div class="col-sm-4">
-    {% if user_other.user_profile.profile_pic %}
-    <img src="/media/{{user_other.user_profile.profile_pic}}" width="200px" height="200px" class="rounded-circle">
-    {% else %}
-    <img src="/media/default_pic.PNG" width="200px" height="200px" class="rounded-circle">
-    {% endif %}
-  </div>
-  <div class="col=sm-8">
-    <h3>@{{user_other.username}} &nbsp;
-      {% if not already_followed %}
-      <a href="{% url 'App_Login:follow' username=user_other.username %}" class="btn btn-primary">Follow</a>
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-sm-4">
+      {% if user_other.user_profile.profile_pic %}
+      <img src="/media/{{user_other.user_profile.profile_pic}}" width="200px" height="200px" class="rounded-circle">
       {% else %}
-      <a href="{% url 'App_Login:unfollow' username=user_other.username %}" class="btn btn-primary">Unfollow</a>
+      <img src="/media/default_pic.PNG" width="200px" height="200px" class="rounded-circle">
       {% endif %}
-    </h3>
-    <br>
-    <h4>{{user_other.post_author.count}} content &nbsp; &nbsp; {{user_other.following.count}} followers &nbsp; &nbsp; {{user_other.follower.count}} following &nbsp; &nbsp;</h4>
-    <br>
-    <h4>{{user_other.first_name}}&nbsp;{{user_other.last_name}}</h4>
-    <h6>{{user_other.user_profile.description|linebreaks}}</h6>
-    <h6>Date of Birth:&nbsp;{{user_other.user_profile.dob}}</h6>
-    <h6>Website: {{user_other.user_profile.website}}</h6>
+    </div>
+    <div class="col=sm-8">
+      <h3>@{{user_other.username}} &nbsp;
+        {% if not already_followed %}
+        <a href="{% url 'App_Login:follow' username=user_other.username %}" class="btn btn-primary">Follow</a>
+        {% else %}
+        <a href="{% url 'App_Login:unfollow' username=user_other.username %}" class="btn btn-primary">Unfollow</a>
+        {% endif %}
+      </h3>
+      <br>
+      <h4>{{user_other.post_author.count}} content &nbsp; &nbsp; {{user_other.following.count}} followers &nbsp; &nbsp; {{user_other.follower.count}} following &nbsp; &nbsp;</h4>
+      <br>
+      <h4>{{user_other.first_name}}&nbsp;{{user_other.last_name}}</h4>
+      <h6>{{user_other.user_profile.description|linebreaks}}</h6>
+      <h6>Date of Birth:&nbsp;{{user_other.user_profile.dob}}</h6>
+      <h6>Website: {{user_other.user_profile.website}}</h6>
+    </div>
   </div>
 </div>
 <hr>
@@ -34,25 +36,28 @@
 <br>
 
 <div class="row">
+
   <div class="col-sm-9">
     {% for content in user_other.post_author.all %}
-    <div style="border: 1px solid #888888;">
-      <div style="padding:10px">
-        {% if content.author.user_profile.profile_pic %}
-        <img src="/media/{{content.author.user_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle">
-        {% else %}
-        <img src="/media/default_pic.PNG" width="40px" height="40px" class="rounded-circle">
-        {% endif %}
-        <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
+    <div class="jumbotron">
+      <div style="border: 1px solid #888888;">
+        <div style="padding:10px">
+          {% if content.author.user_profile.profile_pic %}
+          <img src="/media/{{content.author.user_profile.profile_pic}}" width="40px" height="40px" class="rounded-circle">
+          {% else %}
+          <img src="/media/default_pic.PNG" width="40px" height="40px" class="rounded-circle">
+          {% endif %}
+          <a href="{% url 'App_Login:user' username=content.author %}">{{content.author.first_name}} {{content.author.last_name}}</a>
 
-        <small style="font-size:11px; text-align:right;">
-          {{content.publish_date}}
-        </small>
+          <small style="font-size:11px; text-align:right;">
+            {{content.publish_date}}
+          </small>
+        </div>
+        {{content.caption_content|range_filter}}<a href="{% url 'App_Content:content_details' pk=content.pk %}">see more</a>
+        {% if content.image %}
+        <img src="/media/{{content.image}}" width="100%">
+        {% endif %}
       </div>
-      {{content.caption_content|range_filter}}<a href="{% url 'App_Content:content_details' pk=content.pk %}">see more</a>
-      {% if content.image %}
-      <img src="/media/{{content.image}}" width="100%">
-      {% endif %}
     </div>
     <br>
     {% endfor %}

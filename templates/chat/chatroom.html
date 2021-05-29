@@ -12,7 +12,7 @@
         <h2>This is the "<b>{{ chatroom.name }}</b>" chatroom.</h2>
 
         <p><span class="label label-default">Info</span>&nbsp;&nbsp;{{ chatroom.info }}</p>
-        <p><span class="label label-default">Creator</span>&nbsp;&nbsp;{{ chatroom.created_by }}</p>
+        <p><span class="label label-default">Creator</span>&nbsp;&nbsp;<a href="{% url 'App_Login:user' username=chatroom.created_by %}">{{ chatroom.created_by }}</a></p>
         <p><span class="label label-default">Created</span>&nbsp;&nbsp;{{ chatroom.created }}</p>
         <p>*Displaying 50 most recent Messages</p>
       </div>
@@ -21,17 +21,17 @@
 
       <p><span class="label label-primary">{{ recent_messages.count }} message{{ recent_messages.count|pluralize }}</p>
 
-      <ol>
-        {# Display 50 most recent Messages in the Chatroom #}
+      <ul>
+
 
         {% for message in recent_messages %}
         <li>
-          <b>{{ message.created_by }}</b> at <i>{{ message.created }}</i><br>
+          <a href="{% url 'App_Login:user'  username=message.created_by %}"><b>{{ message.created_by }}</b></a> at <i>{{ message.created }}</i><br>
           <p>{{ message.text }}</p>
         </li>
         <hr>
         {% endfor %}
-      </ol>
+      </ul>
       {% else %}
       <p><b><i>No Messages have been posted yet.</i></b></p><br>
       {% endif %}
