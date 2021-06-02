@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
+from django.contrib import messages
 from chat.models import Chatroom, Message
 from chat.forms import ChatroomForm, MessageForm
 
@@ -76,7 +77,7 @@ class ChatroomView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(ChatroomView, self).get_context_data(**kwargs)
         context['chatroom'] = self.object
-        # Display 50 most recent Messages in Chatroom
+        # 50 most recent Messages in Chatroom
         context['recent_messages'] = Message.objects.filter(chatroom=self.object)[:50]
         return context
 
@@ -104,7 +105,7 @@ class MessageCreate(LoginRequiredMixin, CreateView):
         return super(MessageCreate, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('chat:chatrooms')
+        return reverse_lazy('chat:chatroom', kwargs={'slug': self.kwargs['slug']})
 
 
 class MessageView(LoginRequiredMixin, DetailView):

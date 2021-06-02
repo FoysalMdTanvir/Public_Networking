@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-{% block title_block %}Add a Message{% endblock %}
+{% block title_block %}Send a Message{% endblock %}
 
 {% block body_block %}
 
@@ -8,9 +8,9 @@
   <div class="row">
     <div class="col-lg-8">
 
-      <h2>Crate a Message</h2>
+      <h2>Send a Message</h2>
 
-      <p>Add a Message to your Chatroom for others to see.</p><br>
+      <p>Add a Message to this Chatroom for others to see.</p><br>
 
       <form action="" method="post">
 
@@ -18,7 +18,7 @@
         {{ form|crispy }}
 
         <br>
-        <input type="submit" class="btn btn-success" value="Create a Message" />
+        <input type="submit" class="btn btn-success" value="Send a Message" />
 
       </form>
 

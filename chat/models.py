@@ -17,7 +17,7 @@ class Chatroom(models.Model):
     def get_absolute_url(self):
         return reverse('chatroom_view', kwargs={'slug': self.slug})
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -30,6 +30,3 @@ class Message(models.Model):
 
     def get_absolute_url(self):
         return reverse('message_view', kwargs={'slug': self.slug, 'pk': self.pk})
-
-    class Meta:
-        ('can_delete_messages', 'can delete messages'),
