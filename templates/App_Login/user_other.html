@@ -63,9 +63,13 @@
     {% endfor %}
   </div>
   <div class="col-sm-3">
-    {% for chatroom in user_other.chatroom_creator.all %}
-    <li><a href="{% url 'chat:chatroom' slug=chatroom.slug %}">{{ chatroom.name }}</a>
-      {% endfor %}
+    <div class="jumbotron">
+      <h4>Chatrooms</h4>
+      {% for chatroom in user_other.chatroom_creator.all %}
+      <li><a href="{% url 'chat:chatroom' slug=chatroom.slug %}">{{ chatroom.name }}</a>
+        {% endfor %}
+    </div>
+
   </div>
 </div>
 
