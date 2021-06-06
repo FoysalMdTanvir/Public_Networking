@@ -12,7 +12,7 @@ from chat.forms import ChatroomForm, MessageForm
 
 
 class Home(LoginRequiredMixin, ListView):
-    """ View for Home page with recent Chatrooms """
+    """ View for Chat Home page with recent Chatrooms """
     context_object_name = 'chatroom'
     model = Chatroom
     template_name = 'chat/home.html'
@@ -83,7 +83,7 @@ class ChatroomView(LoginRequiredMixin, DetailView):
 
 
 class MessageCreate(LoginRequiredMixin, CreateView):
-    """ View to create a new Message and add to Chatroom """
+    """ View to create a new Message and send to Chatroom """
     model = Message
     fields = ['text']
 
