@@ -41,4 +41,4 @@ class ProfilePic(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ['profile_pic', 'dob', 'description', 'website', ]
+        fields = ('profile_pic', 'dob', 'description', 'website')

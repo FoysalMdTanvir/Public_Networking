@@ -3,7 +3,7 @@
 {% block title_block %}iBook | Edit {% endblock %}
 {% block body_block %}
 {% if content.author == user %}
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
   {{form|crispy}}
   {% csrf_token %}
   <button type="submit" name="button">Update</button>

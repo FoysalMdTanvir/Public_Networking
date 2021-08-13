@@ -47,16 +47,37 @@ def profile(request):
     return render(request, 'App_Login/profile.html', context={})
 
 
+'''Old user_change function'''
+# @login_required
+# def user_change(request):
+#     current_user = request.user
+#     form = UserProfileChange(instance=current_user)
+#     if request.method == 'POST':
+#         form = UserProfileChange(request.POST, instance=current_user)
+#         if form.is_valid():
+#             form.save()
+#             form = UserProfileChange(instance=current_user)
+#     return render(request, 'App_Login/change_profile.html', context={'form': form})
+
+'''Updated user_change function'''
+# user profile updated
+
+
 @login_required
 def user_change(request):
     current_user = request.user
     form = UserProfileChange(instance=current_user)
+    profile_form = ProfilePic(instance=request.user.user_profile)
     if request.method == 'POST':
         form = UserProfileChange(request.POST, instance=current_user)
-        if form.is_valid():
-            form.save()
+        profile_form = ProfilePic(request.POST, request.FILES, instance=request.user.user_profile)
+        if form.is_valid() and profile_form.is_valid():
+            user = form.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
             form = UserProfileChange(instance=current_user)
-    return render(request, 'App_Login/change_profile.html', context={'form': form})
+    return render(request, 'App_Login/change_profile.html', context={'form': form, 'profile_form': profile_form})
 
 
 @login_required

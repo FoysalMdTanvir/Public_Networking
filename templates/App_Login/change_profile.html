@@ -2,8 +2,9 @@
 {% load crispy_forms_tags %}
 {% block title_block %}Change Profile{% endblock %}
 {% block body_block %}
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
   {{form|crispy}}
+  {{profile_form|crispy}}
   {% csrf_token %}
   <button type="submit" class="btn btn-warning btn-sm">Change</button>
 </form>

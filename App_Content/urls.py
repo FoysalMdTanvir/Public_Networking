@@ -14,4 +14,5 @@ urlpatterns = [
     path('delete/<pk>/', views.DeleteContent.as_view(), name='delete_content'),
     path('category/<str:cats>/', views.CategoryView, name='category'),
     path('category-list/', views.CategoryListView, name='category_list'),
+
 ]
